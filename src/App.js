@@ -28,8 +28,8 @@ useEffect(() => {
 }, [])
 
   return (
-    <CurrentUserContext value={currentUser}>
-      <SetCurrentuserContext value={setCurrentUser}>
+    <CurrentUserContext.Provider value={currentUser}>
+      <SetCurrentuserContext.Provider value={setCurrentUser}>
         <div className={styles.app}>
           <NavBar />
           <Container className={styles.Main}>
@@ -41,8 +41,8 @@ useEffect(() => {
             </Switch>
           </Container>
         </div>
-      </SetCurrentuserContext>
-    </CurrentUserContext>
+      </SetCurrentuserContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 
