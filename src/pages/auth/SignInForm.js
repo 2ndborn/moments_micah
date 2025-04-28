@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import styles from "../../styles/SignInUpForm.module.css";
@@ -7,35 +7,35 @@ import appStyles from "../../App.module.css";
 
 import { Form, Button, Image, Col, Row, Container, Alert } from "react-bootstrap";
 import axios from "axios";
-import { SetCurrentuserContext } from "../../App";
+import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 const SignInForm = () => {
-  const setCurrentUser = useContext(SetCurrentuserContext)
+  const setCurrentUser = useSetCurrentUser();
 
   const [signInData, setSignInData] = useState({
     username: '',
     password: '',
   });
 
-  const {username, password} = signInData;
+  const { username, password } = signInData;
 
   const [errors, setErrors] = useState({})
-  
+
   const handleChange = (event) => {
     setSignInData({
       ...signInData,
       [event.target.name]: event.target.value
     })
   }
-  
+
   const history = useHistory();
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const {data} = await axios.post('/dj-rest-auth/login/', signInData)
+      const { data } = await axios.post('/dj-rest-auth/login/', signInData)
       setCurrentUser(data.user)
       history.push('/');
-    } catch(err) {
+    } catch (err) {
       setErrors(err.response?.data)
     }
   }
@@ -81,20 +81,20 @@ const SignInForm = () => {
               </Alert>
             ))}
 
-            <Button 
-            className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}` }
-            type="submit"
+            <Button
+              className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
+              type="submit"
             >
               Sign In
-              </Button>
-              {errors.non_field_errors?.map((message, idx) => (
+            </Button>
+            {errors.non_field_errors?.map((message, idx) => (
               <Alert className="mt-3" variant="warning" key={idx}>
                 {message}
               </Alert>
             ))}
           </Form>
         </Container>
-        
+
         <Container className={`mt-3 ${appStyles.Content}`}>
           <Link className={styles.Link} to="/signup">
             Don't have an account? <span>Sign up now!</span>
