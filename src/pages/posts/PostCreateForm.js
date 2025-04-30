@@ -55,8 +55,6 @@ function PostCreateForm() {
 
     try {
       const {data} = await axiosReq.post('/posts/', formData);
-      console.log("Response:", data)
-      console.log("API response:", data);
       history.push(`/posts/${data.id}`)
     } catch(err) {
       console.log("errors", err)
@@ -91,7 +89,7 @@ function PostCreateForm() {
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => {}}
+        onClick={() => history.goBack()}
       >
         cancel
       </Button>
