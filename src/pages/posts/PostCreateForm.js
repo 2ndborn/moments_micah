@@ -44,7 +44,7 @@ function PostCreateForm() {
 
   const textFields = (
     <div className="text-center">
-      <Form.Group>
+      <Form.Group className="pb-3">
         <Form.Label>Title</Form.Label>
         <Form.Control
           type="text"
@@ -53,7 +53,8 @@ function PostCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group>
+
+      <Form.Group className="pb-3">
         <Form.Label>Content</Form.Label>
         <Form.Control
           as="textarea"
@@ -110,8 +111,9 @@ function PostCreateForm() {
                 </Form.Label>
               )}
 
-              <Form.File
+              <Form.Control
                 id="image-upload"
+                type="file"
                 accept="image/*"
                 onChange={handleChangeImage}
               />
