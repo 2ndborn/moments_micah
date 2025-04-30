@@ -12,30 +12,35 @@ import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
-import {Image} from "react-bootstrap"
+import { Image } from "react-bootstrap";
 
 function PostCreateForm() {
-  
-  const [postData, setPostData] = useState({title: '', content: ''})
-  const {title, content, image} = postData;
-  const [errors, setErrors] = useState({});
+  console.log("PostCreateForm is loaded!");
+  // const [errors, setErrors] = useState({});
+
+  const [postData, setPostData] = useState({
+    title: "",
+    content: "",
+    image: "",
+  });
+  const { title, content, image } = postData;
 
   const handleChange = (event) => {
     setPostData({
       ...postData,
-      [event.target.name]: event.target.value
-    })
-  }
+      [event.target.name]: event.target.value,
+    });
+  };
 
   const handleChangeImage = (event) => {
-    if (event.target.files.length > 0) {
+    if (event.target.files.length) {
       URL.revokeObjectURL(image);
       setPostData({
         ...postData,
-        image: URL.createObjectURL(event.target.files[0])
-      })
+        image: URL.createObjectURL(event.target.files[0]),
+      });
     }
-  }
+  };
 
   const textFields = (
     <div className="text-center">
@@ -48,7 +53,6 @@ function PostCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
-
       <Form.Group>
         <Form.Label>Content</Form.Label>
         <Form.Control
@@ -62,7 +66,7 @@ function PostCreateForm() {
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => { }}
+        onClick={() => {}}
       >
         cancel
       </Button>
@@ -82,39 +86,36 @@ function PostCreateForm() {
             <Form.Group className="text-center">
               {image ? (
                 <>
-                <figure>
-                  <Image className={appStyles.Image} src={image} rounded />
-                </figure>
-                <div>
-                  <Form.Label 
-                  className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
-                  htmlFor="image-upload"
-                  >
-                    Change the image
-                  </Form.Label>
-                </div>
+                  <figure>
+                    <Image className={appStyles.Image} src={image} rounded />
+                  </figure>
+                  <div>
+                    <Form.Label
+                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                      htmlFor="image-upload"
+                    >
+                      Change the image
+                    </Form.Label>
+                  </div>
                 </>
               ) : (
                 <Form.Label
-                className="d-flex justify-content-center"
-                htmlFor="image-upload"
-              >
-                <Asset
-                  src={Upload}
-                  message='Click or tap to upload a picture'
-                />
-              </Form.Label>
+                  className="d-flex justify-content-center"
+                  htmlFor="image-upload"
+                >
+                  <Asset
+                    src={Upload}
+                    message="Click or tap to upload an image"
+                  />
+                </Form.Label>
               )}
-              
 
               <Form.File
                 id="image-upload"
                 accept="image/*"
                 onChange={handleChangeImage}
               />
-
             </Form.Group>
-
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
