@@ -1,7 +1,7 @@
 import React from 'react'
 import {useCurrentUser} from '../../contexts/CurrentUserContext'
 import styles from '../../styles/Post.module.css'
-import { Card } from 'react-bootstrap'
+import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import Avatar from '../../components/Avatar'
 
@@ -44,6 +44,33 @@ const Post = (props) => {
       <Card.Body>
         {title && <Card.Title className='text-center'>{title}</Card.Title>}
         {content && <Card.Text className='text-center'>{content}</Card.Text>}
+        <div className={styles.PostBar}>
+          {is_owner ? (
+            <OverlayTrigger placement='top' overlay={<Tooltip>You can't like your own post!</Tooltip>}>
+              <i className='far fa-heart' />
+            </OverlayTrigger>
+          ) : (
+            like_id ? (
+              <span onClick={() => {}}>
+                <i className={`fas fa-heart ${styles.Heart}`}></i>
+              </span>
+            ) : currentUser ? (
+                <span onClick={()=>{}}>
+                  <i className={`far fa-heart ${styles.HeartOutline}`}></i>
+                </span>
+            ) : (
+              <OverlayTrigger placement='top'
+               overlay={<Tooltip>Login to like posts!</Tooltip>}>
+                <i className='far fa-heart'></i>
+              </OverlayTrigger>
+            )
+          )}
+          {likes_count}
+          <Link to={`/posts/${id}`}>
+          <i className='far fa-comment'></i>
+          </Link>
+          {comments_count}
+        </div>
       </Card.Body>
     </Card>
   )
