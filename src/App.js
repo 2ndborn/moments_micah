@@ -11,7 +11,7 @@ import PostsPage from "./pages/posts/PostsPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 
 function App() {
-  const currentUser = useCurrentUser
+  const currentUser = useCurrentUser();
   const profile_id = currentUser?.profile_id || "";
 
   return (
@@ -19,9 +19,15 @@ function App() {
       <NavBar />
       <Container className={styles.Main}>
         <Switch>
-          <Route exact path="/" render={() => <PostsPage 
-          message="No results found. Adjust the search keyword." />} />
-          <Route exact
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <PostsPage message="No results found. Adjust the search keyword." />
+            )}
+          />
+          <Route
+            exact
             path="/feed"
             render={() => (
               <PostsPage
@@ -30,7 +36,8 @@ function App() {
               />
             )}
           />
-          <Route exact
+          <Route
+            exact
             path="/liked"
             render={() => (
               <PostsPage
