@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { useCurrentUser } from "./CurrentUserContext";
+import { followHelper } from "../utils/utils";
 
 export const ProfileDataContext = createContext()
 export const SetProfileDataContext = createContext();
@@ -42,15 +43,16 @@ export const ProfileDataProvider = ({ children }) => {
             })
             setProfileData((prevState) => ({
                 ...prevState,
+                pageProfile: {
+                    results: prevState.pageProfile.results.map(
+                        profile => followHelper(profile, clickedProfile, data.id)),
+                },
                 popularProfiles: {
                     ...prevState.popularProfiles,
-                    results: prevState.popularProfiles.results.map(profile => {
-                        return profile.id === clickedProfile.id
-                        ? // This is the profile I clicked on
-                          // update its followers count and its following id
-                    })
-                }
-            }))
+                    results: prevState.popularProfiles.results.map(
+                        profile => followHelper(profile, clickedProfile, data.id)),
+                },
+            }));
         } catch(err) {
             console.log(err)
         }
