@@ -137,7 +137,7 @@ const ProfileEditForm = () => {
                   Change the image
                 </Form.Label>
               </div>
-              <Form.File
+              <Form.Control
                 id="image-upload"
                 ref={imageFile}
                 accept="image/*"
