@@ -1,16 +1,9 @@
 import { rest } from "msw"
 
-<<<<<<< HEAD
 const baseURL = "https://drf-api-micah-ad42675b3e01.herokuapp.com/"
 
 export const handlers = [
     rest.get(`${baseURL}dj-rest-auth/user/`, (req,res,ctx) => {
-=======
-const baseURL = 'https://drf-api-micah-ad42675b3e01.herokuapp.com/'
-
-export const handlers = [
-    rest.get(`${baseURL}dj-rest-auth/user/`, (req, res, ctx) => {
->>>>>>> 83560b3079e7e7655bc17c13cd791d0101e04da4
         return res(ctx.json(
             {
                 "pk": 3,
@@ -23,14 +16,7 @@ export const handlers = [
             }
         ))
     }),
-<<<<<<< HEAD
     rest.post(`${baseURL}dj-rest-auth/user/`, (req,res,ctx) => {
         return res(ctx.status(200));
     })
 ]
-=======
-    rest.post(`${baseURL}dj-rest-auth/logout/`, (req,res,ctx) => {
-        return res(ctx.status(200));
-    })
-]
->>>>>>> 83560b3079e7e7655bc17c13cd791d0101e04da4
