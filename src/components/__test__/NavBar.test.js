@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { NavBar } from "../NavBar";
+import NavBar from "../NavBar";
+import { CurrentUserProvider } from "../../contexts/CurrentUserContext";
 
 test('render NavBar', () => {
     render(
@@ -10,5 +11,17 @@ test('render NavBar', () => {
     )
     // screen.debug();
     const signInLink = screen.getByRole('link', { name: 'Sign in'})
-    expect(signInLink).not.toBeInTheDocument();
+    expect(signInLink).toBeInTheDocument();
 })
+
+test('renders link to the user profile for a logged in user', async () => {
+    render(
+        <Router>
+            <CurrentUserProvider>
+                <NavBar />
+            </CurrentUserProvider>
+        </Router>
+    );
+    // screen.debug();
+    const profileAvatar = await screen.findByText('Profile')
+});
