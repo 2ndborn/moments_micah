@@ -57,10 +57,5 @@
   "engines": {
     "node": "16.19.1",
     "npm": "8.19.3"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "^axios$": "axios/dist/node/axios.js"
-    }
   }
 }
