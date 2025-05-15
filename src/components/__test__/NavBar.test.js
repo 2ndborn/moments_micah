@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import NavBar from "../NavBar";
 import { CurrentUserProvider } from "../../contexts/CurrentUserContext";
+import PostCreateForm from "../../pages/posts/PostCreateForm";
 
 test('render NavBar', () => {
     render(
@@ -73,4 +74,27 @@ test('renders link to the feed and liked buttons for a logged in user', async ()
 
     expect(feed).toBeInTheDocument();
     expect(liked).toBeInTheDocument();
+});
+
+test('renders the create post page', async () => {
+    render(
+        <Router>
+            <CurrentUserProvider>
+                <NavBar />
+                <PostCreateForm />
+            </CurrentUserProvider>
+        </Router>
+    );
+
+    const postCreate = await screen.findByRole('link', { name: 'Add post' });
+    fireEvent.click(postCreate);
+
+    const createButtons = await screen.findAllByRole('button', { name: 'create' });
+    const createButton = createButtons[0];
+
+    const cancelButtons = await screen.findAllByRole('button', {name: 'cancel'})
+    const cancelButton = cancelButtons[0];
+
+    expect(createButton).toBeInTheDocument();
+    expect(cancelButton).toBeInTheDocument();
 });
