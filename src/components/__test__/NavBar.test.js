@@ -27,6 +27,19 @@ test('renders link to the user profile for a logged in user', async () => {
     expect(profileAvatar).toBeInTheDocument();
 });
 
+test('renders link to the user create a post', async () => {
+    render(
+        <Router>
+            <CurrentUserProvider>
+                <NavBar />
+            </CurrentUserProvider>
+        </Router>
+    );
+    // screen.debug();
+    const createPost = await screen.findByText('Add post')
+    expect(createPost).toBeInTheDocument();
+});
+
 test('renders sign in and sign up button on logout', async () => {
     render(
         <Router>
@@ -44,4 +57,20 @@ test('renders sign in and sign up button on logout', async () => {
 
     expect(signInLink).toBeInTheDocument();
     expect(signUpLink).toBeInTheDocument();
+});
+
+test('renders link to the feed and liked buttons for a logged in user', async () => {
+    render(
+        <Router>
+            <CurrentUserProvider>
+                <NavBar />
+            </CurrentUserProvider>
+        </Router>
+    );
+    // screen.debug();
+    const feed = await screen.findByRole('link', {name: 'Feed'})
+    const liked = await screen.findByRole('link', {name: 'Liked'})
+
+    expect(feed).toBeInTheDocument();
+    expect(liked).toBeInTheDocument();
 });
