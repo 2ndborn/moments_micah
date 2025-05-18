@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import NavBar from "../NavBar";
 import { CurrentUserProvider } from "../../contexts/CurrentUserContext";
 import PostCreateForm from "../../pages/posts/PostCreateForm";
+import PostsPage from "../../pages/posts/PostsPage";
 
 test('render NavBar', () => {
     render(
@@ -95,6 +96,14 @@ test('renders the create post page', async () => {
     const cancelButtons = await screen.findAllByRole('button', {name: 'cancel'})
     const cancelButton = cancelButtons[0];
 
+    const titleTexts = await screen.findAllByText('Title');
+    const titleText = titleTexts[0];
+
+    const contentTexts = await screen.findAllByText('Title');
+    const contentText = contentTexts[0];
+
     expect(createButton).toBeInTheDocument();
     expect(cancelButton).toBeInTheDocument();
+    expect(titleText).toBeInTheDocument();
+    expect(contentText).toBeInTheDocument();
 });

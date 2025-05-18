@@ -29,4 +29,7 @@ export const handlers = [
     rest.options(`${baseURL}dj-rest-auth/token/refresh/`, (req, res, ctx) => {
         return res(ctx.status(204)); // Mock successful preflight response
     }),
+    rest.options(`${baseURL}profiles/`, (req, res, ctx) => {
+        return res(ctx.status(204));
+    })
 ]
