@@ -3,7 +3,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import NavBar from "../NavBar";
 import { CurrentUserProvider } from "../../contexts/CurrentUserContext";
 import PostCreateForm from "../../pages/posts/PostCreateForm";
-import PostsPage from "../../pages/posts/PostsPage";
 
 test('render NavBar', () => {
     render(
