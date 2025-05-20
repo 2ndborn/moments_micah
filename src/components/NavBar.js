@@ -7,18 +7,20 @@ import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContex
 import Avatar from './Avatar';
 import axios from 'axios';
 import useClickOutsideToggle from '../hooks/useClickOutsideToggle';
+import { removeTokenTimestamp } from '../utils/utils';
 
 const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser()
 
-    const {expanded, setExpanded, ref} = useClickOutsideToggle();
+    const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
     const handleSignOut = async () => {
         try {
             await axios.post('/dj-rest-auth/logout/')
             setCurrentUser(null)
-        } catch(err) {
+            removeTokenTimestamp();
+        } catch (err) {
             console.log(err)
         }
     }
@@ -31,7 +33,7 @@ const NavBar = () => {
             <i className='fas fa-plus-square'></i>Add post
         </NavLink>
     )
-    
+
     const loggedInIcons = (
         <>
             <NavLink to='/feed'
@@ -42,7 +44,7 @@ const NavBar = () => {
             </NavLink>
             <NavLink to='/liked'
                 className={styles.NavLink}
-                activeClassName={styles.Active}                
+                activeClassName={styles.Active}
             >
                 <i className='fas fa-heart'></i>Liked
             </NavLink>
@@ -90,8 +92,8 @@ const NavBar = () => {
                     aria-controls="basic-navbar-nav"
                 />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav 
-                    className="ms-md-auto flex-md-row flex-column align-items-start"
+                    <Nav
+                        className="ms-md-auto flex-md-row flex-column align-items-start"
                     >
                         <NavLink exact to='/' className={styles.NavLink} activeClassName={styles.Active}>
                             <i className='fas fa-home'></i>Home
