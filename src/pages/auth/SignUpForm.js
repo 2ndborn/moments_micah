@@ -34,7 +34,6 @@ const SignUpForm = () => {
       ...signUpData,
       [event.target.name]: event.target.value,
     });
-    console.log("updated signUpData", signUpData)
   };
   
   const handleSubmit = async (event) => {

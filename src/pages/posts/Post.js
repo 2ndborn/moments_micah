@@ -1,7 +1,9 @@
 import React from 'react'
 import {useCurrentUser} from '../../contexts/CurrentUserContext'
 import styles from '../../styles/Post.module.css'
-import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import Card from 'react-bootstrap/Card'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Tooltip from 'react-bootstrap/Tooltip'
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import Avatar from '../../components/Avatar'
 import { axiosRes } from '../../api/axiosDefaults'
@@ -37,7 +39,7 @@ const Post = (props) => {
       await axiosRes.delete(`/posts/${id}/`)
       history.goBack()
     } catch(err) {
-      console.log(err)
+      // console.log(err)
     }
   }
 
@@ -53,7 +55,7 @@ const Post = (props) => {
         })
       }))
     } catch(err) {
-      console.log(err)
+      // console.log(err)
     }
   }
 
@@ -69,7 +71,7 @@ const Post = (props) => {
         })
       }))
     } catch(err) {
-      console.log(err)
+      // console.log(err)
     }
   }
 

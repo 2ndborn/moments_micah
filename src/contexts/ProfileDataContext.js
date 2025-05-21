@@ -24,13 +24,12 @@ export const ProfileDataProvider = ({ children }) => {
                 const { data } = await axiosReq.get(
                     '/profiles/?ordering=-followers_count'
                 )
-                console.log(data)
                 setProfileData((prevState) => ({
                     ...prevState,
                     popularProfiles: { results: data.results },
                 }))
             } catch (err) {
-                console.log(err)
+                // console.log(err)
             }
         }
         handleMount()
@@ -54,7 +53,7 @@ export const ProfileDataProvider = ({ children }) => {
                 },
             }));
         } catch(err) {
-            console.log(err)
+            // console.log(err)
         }
     }
 
@@ -75,7 +74,7 @@ export const ProfileDataProvider = ({ children }) => {
                 },
             }))
         } catch(err) {
-            console.log(err)
+            // console.log(err)
         }
     }
 
